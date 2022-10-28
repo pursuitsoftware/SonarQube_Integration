@@ -1,4 +1,2 @@
 # SonarQube_Integration
-Sample code to test the sonarQube integration
-
-var=input
+Code to be scanned in AzDo for JM-POC
