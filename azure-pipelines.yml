@@ -34,3 +34,6 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300' # string. Required. Timeout (s). Default: 300.
