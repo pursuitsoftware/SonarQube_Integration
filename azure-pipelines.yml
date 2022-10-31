@@ -1,32 +1,52 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
-
+# Variable 'SonarToken' was defined in the Variables tab
+# Agent Queue 'Azure Pipelines' was used with unrecognized Agent Specification, vmImage property must be specified to determine image - https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml#software
 trigger:
-- main
+  branches:
+    include:
+    - main
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: WebServer_Job
+  pool:
+    name: Azure Pipelines
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: SonarQubePrepare@5
+    displayName: Prepare analysis on SonarQube
+    inputs:
+      SonarQube: f2e1c520-c280-4a7c-b477-4a9f96cac070
+      scannerMode: CLI
+      configMode: manual
+      cliProjectKey: JMFE_SonarQube_Intergration_POC_JMFE_SonarQube_Intergration_POC
+  - task: CmdLine@2
+    displayName: Command Line Script
+    inputs:
+      script: >-
+        FILTERED_PARAMS=$(echo $SONARQUBE_SCANNER_PARAMS | sed 's/"sonar.branch.name":"[^"]*"\,//g')
 
-pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-      python.version: '3.7'
+        echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$FILTERED_PARAMS"
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
-
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
-
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
-- task: SonarQubePublish@4
-  inputs:
-    pollingTimeoutSec: '300' # string. Required. Timeout (s). Default: 300.
+        echo $(build.buildid)
+  - task: SonarQubeAnalyze@5
+    displayName: Run Code Analysis
+  - task: SonarQubePublish@5
+    displayName: Publish Quality Gate Result
+  - task: PythonScript@0
+    displayName: Run a Python script
+    inputs:
+      scriptPath: $(System.DefaultWorkingDirectory)/scan.py
+  - script: |
+         python -m venv antenv
+         source antenv/bin/activate
+         python -m pip install --upgrade pip
+         pip install setup
+         pip install -r requirements.txt
+         
+...
