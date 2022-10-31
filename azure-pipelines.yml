@@ -13,7 +13,7 @@ jobs:
 - job: Job_1
   displayName: WebServer_Job
   pool:
-    name: Azure Pipelines
+    vmImage: windows-latest
   steps:
   - checkout: self
     clean: true
