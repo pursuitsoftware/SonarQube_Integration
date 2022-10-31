@@ -18,26 +18,6 @@ jobs:
   - checkout: self
     clean: true
     fetchTags: false
-  - task: SonarQubePrepare@5
-    displayName: Prepare analysis on SonarQube
-    inputs:
-      SonarQube: f2e1c520-c280-4a7c-b477-4a9f96cac070
-      scannerMode: CLI
-      configMode: manual
-      cliProjectKey: JMFE_SonarQube_Intergration_POC_JMFE_SonarQube_Intergration_POC
-  - task: CmdLine@2
-    displayName: Command Line Script
-    inputs:
-      script: >-
-        FILTERED_PARAMS=$(echo $SONARQUBE_SCANNER_PARAMS | sed 's/"sonar.branch.name":"[^"]*"\,//g')
-
-        echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$FILTERED_PARAMS"
-
-        echo $(build.buildid)
-  - task: SonarQubeAnalyze@5
-    displayName: Run Code Analysis
-  - task: SonarQubePublish@5
-    displayName: Publish Quality Gate Result
   - task: PythonScript@0
     displayName: Run a Python script
     inputs:
