@@ -41,7 +41,7 @@ jobs:
   - task: PythonScript@0
     displayName: Run a Python script
     inputs:
-      scriptPath: $(System.DefaultWorkingDirectory)/scan.py
+      scriptPath: scan.py
   - script: |
          python -m venv antenv
          source antenv/bin/activate
