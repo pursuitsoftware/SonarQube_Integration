@@ -1,9 +1,9 @@
 # Variable 'SonarToken' was defined in the Variables tab
 # Agent Queue 'Azure Pipelines' was used with unrecognized Agent Specification, vmImage property must be specified to determine image - https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml#software
-trigger:
-  branches:
-    include:
-    - main
+# trigger:
+#   branches:
+#     include:
+#     - main
 resources:
   repositories:
   - repository: self
