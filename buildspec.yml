@@ -24,6 +24,7 @@ phases:
     commands:
       - cd sonar-scanner-4.7.0.2747-linux
       - cd bin
+      - ls $pwd
       - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
