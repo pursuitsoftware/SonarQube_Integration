@@ -1,0 +1,6 @@
+<project>
+<modelVersion> 1.0 </modelVersion>
+<groupId > com.TestProject </groupId>
+<artifactId > MavenJavaProject </artifactId>
+<version > 3.0 </version>
+</project>
