@@ -22,7 +22,8 @@ phases:
       - export PATH=$PATH:/sonar-scanner-cli-4.7.0.2747-linux/sonar-scanner-4.7.0.2747-linux/bin/
   build:
     commands:
-      - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
+      - cd sonar-scanner-4.7.0.2747-linux/bin/
+      - ./sonar-scanner -Dsonar.login="pursuitsoftware_SonarQube_Integration" -Dsonar.host.url="https://sonarcloud.io" -Dsonar.projectKey="SonarQube_Integration" -Dsonar.organization="pursuitsoftware"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
