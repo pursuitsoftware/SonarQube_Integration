@@ -22,7 +22,7 @@ phases:
       - export PATH=$PATH:/sonar-scanner-cli-4.7.0.2747-linux/bin/
   build:
     commands:
-      - cd sonar-scanner-cli-4.7.0.2747-linux
+      - cd sonar-scanner-4.7.0.2747-linux
       - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
