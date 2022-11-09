@@ -15,14 +15,14 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y jq
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
       - sh $pwd
-      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
       - ls $pwd
-      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
+      - export PATH=$PATH:/sonar-scanner-cli-4.7.0.2747-linux/sonar-scanner-cli-4.7.0.2747-linux/bin/
   build:
     commands:
-      - sonar-scanner-3.3.0.1492-linux -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
+      - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
