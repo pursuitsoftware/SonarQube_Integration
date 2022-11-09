@@ -1,10 +1,10 @@
 version: 0.2
 env:
   secrets-manager:
-    LOGIN: jm-sonar-secrets:sonartoken
-    HOST: jm-sonar-secrets:HOST
-    Organization: jm-sonar-secrets:Organization
-    Project: jm-sonar-secrets:Project
+    LOGIN: prod/sonar:sonartoken
+    HOST: prod/sonar:HOST
+    Organization: prod/sonar:Organization
+    Project: prod/sonar:Project
 
 phases:
   install:
