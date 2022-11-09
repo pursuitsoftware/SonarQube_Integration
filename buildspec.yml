@@ -3,8 +3,8 @@ env:
   secrets-manager:
     LOGIN: prod/sonar:sonartoken
     HOST: prod/sonar:HOST
-    Organization: prod/sonar:pursuitsoftware
-    Project: prod/sonar:SonarQube_Integration
+    Organization: prod/sonar:Organization
+    Project: prod/sonar:Project
 
 phases:
   install:
